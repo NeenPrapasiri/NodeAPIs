@@ -1,5 +1,5 @@
 const pgp = require('pg-promise')();
-const db = pgp('postgres://user_1:P@ssW0rd1@postgres:5432/pg_db');
+const db = pgp(`postgres://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@postgres:${process.env.POSTGRES_PORT}/${process.env.POSTGRES_DB_NAME}`);
 
 async function query(rawQuery, values = []) {
     try {

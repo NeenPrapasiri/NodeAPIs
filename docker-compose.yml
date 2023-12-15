@@ -4,9 +4,12 @@ services:
   postgres:
     image: postgres
     environment:
-      POSTGRES_USER: user_1
-      POSTGRES_PASSWORD: P@ssW0rd1
-      POSTGRES_DB: pg_db
+      - POSTGRES_USER=user_1
+      - POSTGRES_PASSWORD=P@ssW0rd1
+      - POSTGRES_DB_NAME=pg_db
+      - POSTGRES_PORT=5432
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
 
@@ -16,6 +19,11 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
+    environment:
+      - POSTGRES_USER=user_1
+      - POSTGRES_PASSWORD=P@ssW0rd1
+      - POSTGRES_DB_NAME=pg_db
+      - POSTGRES_PORT=5432
     develop:
       watch:
         - action: sync
