@@ -9,7 +9,7 @@ services:
       - POSTGRES_DB_NAME=pg_db
       - POSTGRES_PORT=5432
     volumes:
-      - ./db:/docker-entrypoint-initdb.d/
+      - ./db/01-init.sh:/docker-entrypoint-initdb.d/01-init.sh
     ports:
       - "5432:5432"
 
